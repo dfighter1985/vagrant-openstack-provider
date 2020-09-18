@@ -24,7 +24,24 @@ module VagrantPlugins
           end
         end
         fail Errors::UnableToResolveIP if net_addresses.size == 0
-        net_addresses[0]['addr']
+        
+        config = env[:machine].provider_config
+        host = nil
+        
+        if not config.ssh_ip_version.nil?
+          net_addresses.each do |address|
+            if address['version'] == config.ssh_ip_version
+              host = address['addr']
+              break
+            end
+          end
+        end
+        
+        if host.nil?
+          host = net_addresses[0]['addr']
+        end
+        
+        host
       end
     end
   end

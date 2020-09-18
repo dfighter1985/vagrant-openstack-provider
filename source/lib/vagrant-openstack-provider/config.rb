@@ -92,6 +92,13 @@ module VagrantPlugins
       #
       # @return [String]
       attr_accessor :ssh_username
+      
+      
+      # The desired version of the IP address to use for SSH connection.
+      # In case there are both IPv4, and IPv6 versions available
+      #
+      # @return [Integer]
+      attr_accessor :ssh_ip_version
 
       # The SSH timeout use after server creation.
       #
@@ -285,6 +292,7 @@ module VagrantPlugins
         @rsync_ignore_files = []
         @keypair_name = UNSET_VALUE
         @ssh_username = UNSET_VALUE
+        @ssh_ip_version = UNSET_VALUE
         @ssh_timeout = UNSET_VALUE
         @floating_ip = UNSET_VALUE
         @floating_ip_pool = []
@@ -412,6 +420,7 @@ module VagrantPlugins
         # The SSH values by default are nil, and the top-level config
         # `config.ssh` and `config.vm.boot_timeout` values are used.
         @ssh_username = nil if @ssh_username == UNSET_VALUE
+        @ssh_ip_version = nil if @ssh_ip_version == UNSET_VALUE
         @ssh_timeout = nil if @ssh_timeout == UNSET_VALUE
 
         @server_create_timeout = 200 if @server_create_timeout == UNSET_VALUE

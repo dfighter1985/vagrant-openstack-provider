@@ -251,6 +251,8 @@ end
 
 If neither `keypair_name` nor `public_key_path` are set, vagrant will generate a new ssh key and automatically import it in OpenStack, unless `config.ssh.insert_key` is `false`.
 
+* `ssh_ip_version` - The version of IP (4 or 6) to prefer when connecting to the host. If it's not provided the first IP will be used.
+
 * `ssh_disabled` - if set to `true`, all ssh actions managed by the provider will be disabled during the `vagrant up`.
    We recommend to use this option only to create private VMs that won't be accessed directly from vagrant. By contrast,
    others commands like `vagrant ssh` or `vagrant provision` is run normally but it is likely to fail. Default value is
